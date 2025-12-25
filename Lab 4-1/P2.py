@@ -2,37 +2,19 @@ from BankAccount import BankAccount
 
 accounts = []
 
-def new_account(name, acc_type, balance=0):
-    acc = BankAccount()
-    acc.name = name
-    acc.type = acc_type
-    acc.balance = balance
+john = BankAccount("John", "saving", 500)
+tim = BankAccount("Tim", "loan", -1_000_000)
+sarah = BankAccount("Sarah", "saving", 0)
 
-    if acc_type == "saving":
-        BankAccount.last_saving_number += 1
-        t = BankAccount._BankAccount__type_saving
-        r = BankAccount.last_saving_number
-    else:
-        BankAccount.last_loan_number += 1
-        t = BankAccount._BankAccount__type_loan
-        r = BankAccount.last_loan_number
+accounts.append(john)
+accounts.append(tim)
+accounts.append(sarah)
 
-    acc.account_number = f"{BankAccount.branch_number}-{t}-{r}"
-    accounts.append(acc)
-    return acc
-
-
-# Create accounts
-john = new_account("John", "saving", 500)
-tim = new_account("Tim", "loan", -1_000_000)
-sarah = new_account("Sarah", "saving")
-
-# Activities
 john.deposit(3000)
 tim.pay_loan((-tim.balance) / 2)
 sarah.deposit(50_000_000)
-new_account("Sarah", "loan", -100_000_000)
 
-# Show all accounts
+sarah_loan = BankAccount("Sarah", "loan", -100_000_000)
+accounts.append(sarah_loan)
 for acc in accounts:
     acc.print_customer()

@@ -10,11 +10,24 @@ class BankAccount:
     __type_loan = 2
 
     # Constructor
-    def __init__(self):
-        self.name = ""
-        self.type = "saving"
-        self.balance = 0
-        self.account_number = ""
+    def __init__(self , name , type , balance):
+        self.name = name
+        self.type = type
+        self.balance = balance
+        
+
+        if type == "saving":
+            BankAccount.last_saving_number += 1
+            t = BankAccount.__type_saving
+            r = BankAccount.last_saving_number
+        else:
+            BankAccount.last_loan_number += 1
+            t = BankAccount.__type_loan
+            r = BankAccount.last_loan_number
+
+        self.account_number = f"{BankAccount.branch_number}-{t}-{r}"
+
+
 
     # Instance methods
     def print_customer(self):
