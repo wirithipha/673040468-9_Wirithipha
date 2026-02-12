@@ -139,11 +139,21 @@ class BMICalculator(QWidget):
         info_label.setWordWrap(True)
         info_label.setAlignment(Qt.AlignCenter)
 
-        boys_link = QLabel('<a href="https://www.nhs.uk/">BMI graph for BOYS</a>')
+        boys_link = QLabel(
+            '<a style="color:#1f4bff; text-decoration: underline;" '
+            'href="https://cdn.who.int/media/docs/default-source/child-growth/growth-reference-5-19-years/bmi-for-age-(5-19-years)/cht-bmifa-boys-z-5-19years.pdf?sfvrsn=4007e921_4">'
+            'BMI graph for BOYS</a>'
+        )
+
         boys_link.setOpenExternalLinks(True)
         boys_link.setAlignment(Qt.AlignCenter)
 
-        girls_link = QLabel('<a href="https://www.nhs.uk/">BMI graph for GIRLS</a>')
+        girls_link = QLabel((
+            '<a style="color:#1f4bff; text-decoration: underline;" '
+            'href="https://cdn.who.int/media/docs/default-source/child-growth/growth-reference-5-19-years/bmi-for-age-(5-19-years)/cht-bmifa-girls-z-5-19years.pdf?sfvrsn=c708a56b_4">'
+            'BMI graph for GIRLS</a>'
+        )
+)
         girls_link.setOpenExternalLinks(True)
         girls_link.setAlignment(Qt.AlignCenter)
 
@@ -174,8 +184,19 @@ class BMICalculator(QWidget):
     
     def calculate_bmi(self):
         try:
-            weight = float(self.weight_input.text())
-            height = float(self.height_input.text())
+            if self.weight_input.text()== '':
+                return 0
+            else:
+                weight = float(self.weight_input.text())
+            if self.weight_input.text()== '':
+                return 0
+            else:
+                height = float(self.height_input.text())
+            
+            if weight <= 0:
+                return 0
+            if height <= 0:
+                return 0
 
             if self.weight_unit.currentText() == "pounds":
                 weight *= 0.453592
@@ -196,7 +217,7 @@ class BMICalculator(QWidget):
                 self.child_widget.show()
 
         except:
-            self.bmi_value.setText("Error")
+            self.bmi_value.setText(" ")
             self.table_widget.hide()
             self.child_widget.hide()
 
